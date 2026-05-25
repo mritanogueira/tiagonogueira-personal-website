@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" aria-hidden="true">
+  <circle cx="300" cy="300" r="280" fill="black"/>
+  <circle cx="300" cy="300" r="60" fill="black" stroke="white" stroke-width="2"/>
+  <defs>
+    <path id="circlePath" d="M300,300 m-230,0 a230,230 0 1,1 460,0 a230,230 0 1,1 -460,0"/>
+    <path id="innerCircle" d="M300,300 m-160,0 a160,160 0 1,1 320,0 a160,160 0 1,1 -320,0"/>
+  </defs>
+  <text fill="white" font-size="12" letter-spacing="2">
+    <textPath href="#circlePath">
+      FAZ DESTA CANÇÃO A MANTA DO TEU CORAÇÃO • PARA TE ACONCHEGAR •
+      QUANDO A SAUDADE TE ASSALTAR • PALAVRAS ENTERNECEM • MELODIAS AQUECEM •
+      FAZ DESTA CANÇÃO A MANTA DO TEU CORAÇÃO •
+    </textPath>
+  </text>
+  <text x="300" y="500" fill="white" font-size="16" text-anchor="middle" letter-spacing="4">
+    TIAGO NOGUEIRA
+  </text>
+  <text fill="white" font-size="10" opacity="0.8" letter-spacing="1.5">
+    <textPath href="#innerCircle">
+      VEM, VEM DANÇAR À LUZ DA LUA • VEM QUE A SAUDADE APERTA •
+      DÁ-ME A TUA LUZ PARA ME GUIAR • A CIDADE ESTÁ DESERTA •
+    </textPath>
+  </text>
+  <g stroke="white" stroke-width="3" fill="none" stroke-linecap="round">
+    <circle cx="300" cy="240" r="25"/>
+    <path d="M280 225 Q300 210 320 225"/>
+    <path d="M250 300 Q300 260 350 300"/>
+    <ellipse cx="280" cy="300" rx="45" ry="30"/>
+    <line x1="305" y1="300" x2="385" y2="290"/>
+    <path d="M250 340 Q300 320 350 340"/>
+  </g>
+</svg>

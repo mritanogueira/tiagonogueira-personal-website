@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiago Nogueira</title>
+  <script src="js/theme-init.js"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="page-home">
+  <div id="site-header"></div>
+
+  <main>
+    <section class="hero">
+      <img src="hero-image.avif" alt="Tiago Nogueira" class="hero__image" />
+      <div class="hero__overlay"></div>
+      <span class="hero__side-text">Nogueira, Primeira Linha</span>
+      <div class="hero__title-block">
+        <h1 class="hero__title">Tiago Nogueira</h1>
+      </div>
+    </section>
+
+    <section class="section home-bio">
+      <div class="container home-bio-grid">
+        <p class="text-intro home-bio__lead">
+          Tiago Nogueira canta, escreve e compõe canções originais, onde o quotidiano, a memória e
+          a imaginação se cruzam. Trabalha como músico, compositor e letrista em projetos próprios e colaborações com outros
+          artistas. 
+        </p>
+        <div class="home-bio__aside">
+          <p class="home-bio__caption">
+          Paralelamente, integra a banda Os Quatro e Meia, com a qual tem vindo a
+          desenvolver um percurso sólido na música portuguesa. 
+          </p>
+          <a href="biografia.html" class="link-arrow home-bio__link">
+            Saber mais
+            <span class="link-arrow__circle home-bio__link-circle">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H4M10 2V8"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="container">
+        <div class="grid-main">
+          <h2 class="heading-section">Selecção de Canções</h2>
+          <p class="text-caption text-muted">
+            Selecção de canções que o autor escreveu ou interpretou, revelando a sua
+            abordagem à composição e criatividade.
+          </p>
+        </div>
+
+        <div class="grid-cards song-cards-grid mt-xl" id="home-songs-grid"></div>
+
+        <div class="home-songs__cta">
+          <button type="button" class="home-cta-outline" id="home-songs-more">Explorar Mais</button>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/songs.js"></script>
+  <script src="js/home-songs.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/layout.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initLayout("light");
+      initHomeSongCards();
+    });
+  </script>
+</body>
+</html>

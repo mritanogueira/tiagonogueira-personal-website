@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concertos — Tiago Nogueira</title>
+  <script src="js/theme-init.js"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <header class="page-header">
+      <div class="container">
+        <h1 class="heading-section">Concertos</h1>
+      </div>
+    </header>
+
+    <section class="section section--tight" style="padding-top: 0;">
+      <div class="container">
+        <div class="concert-booking">
+          <h2 class="heading-subsection">João Só &amp; Tiago Nogueira</h2>
+          <p class="text-body text-muted mt-lg" style="max-width: 52ch;">
+            Concertos em duo — agenda, datas e bilhetes através da Primeira Linha.
+          </p>
+          <a
+            href="https://www.primeiralinha.pt/joaosoetiagonogueira"
+            class="link-arrow concert-booking__link mt-lg"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Ver agenda
+            <span class="link-arrow__circle">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H4M10 2V8"/></svg>
+            </span>
+          </a>
+        </div>
+
+        <h2 class="heading-subsection mt-xl">Os Quatro e Meia</h2>
+        <p class="text-body text-muted mt-lg" style="max-width: 48ch;">
+          Próximas datas de concertos e apresentações ao vivo.
+        </p>
+
+        <ul class="concert-list mt-xl" id="concert-list"></ul>
+      </div>
+    </section>
+
+    <section class="section concert-instagram" aria-labelledby="instagram-heading">
+      <div class="container">
+        <div class="concert-instagram__header">
+          <h2 id="instagram-heading" class="heading-subsection">Instagram</h2>
+          <div class="concert-instagram__accounts">
+            <a
+              href="https://www.instagram.com/tiagoamaralnogueira/"
+              class="concert-instagram__profile"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Tiago Nogueira
+            </a>
+            <a
+              href="https://www.instagram.com/osquatroemeia/"
+              class="concert-instagram__profile"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Os Quatro e Meia
+            </a>
+          </div>
+        </div>
+
+        <div class="instagram-feed">
+          <div class="instagram-feed__grid" id="instagram-feed-grid" aria-label="Últimas publicações no Instagram"></div>
+        </div>
+
+        <p class="concert-instagram__cta mt-lg">
+          <a
+            href="https://www.instagram.com/tiagoamaralnogueira/"
+            class="link-arrow"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Seguir no Instagram
+            <span class="link-arrow__circle">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H4M10 2V8"/></svg>
+            </span>
+          </a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/songs.js"></script>
+  <script src="js/concerts.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/instagram-feed.js"></script>
+  <script async src="https://www.instagram.com/embed.js" onload="processInstagramEmbeds()"></script>
+  <script>
+    function renderConcertItem(concert) {
+      return `
+        <li class="concert-list__item">
+          <span class="concert-list__date">${concert.date}</span>
+          <span class="concert-list__location">${concert.location}</span>
+          <span class="concert-list__venue">${concert.venue || ""}</span>
+        </li>
+      `;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initLayout("solid");
+      document.getElementById("concert-list").innerHTML =
+        CONCERTS.map(renderConcertItem).join("");
+      initInstagramFeed();
+    });
+  </script>
+</body>
+</html>

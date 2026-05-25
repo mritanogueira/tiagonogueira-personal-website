@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Música — Tiago Nogueira</title>
+  <script src="js/theme-init.js"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <header class="page-header">
+      <div class="container">
+        <h1 class="heading-section">Música</h1>
+      </div>
+    </header>
+
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div id="search-results" class="search-results" hidden>
+          <p class="search-results__count" id="search-results-count"></p>
+        </div>
+
+        <div id="favorites-section">
+          <h2 class="heading-subsection">Favoritos</h2>
+          <p class="text-body text-muted mt-lg" style="max-width: 48ch;">
+            Canções em destaque de Tiago Nogueira e Os Quatro e Meia.
+          </p>
+          <ul class="song-list song-list--favorites mt-xl" id="favorites-list"></ul>
+        </div>
+
+        <div class="mt-xl" style="margin-top: var(--space-3xl);">
+          <h2 class="heading-subsection">Todas as Canções</h2>
+          <p class="text-body text-muted mt-lg" style="max-width: 48ch;">
+            Repertório completo de composições de Tiago Nogueira por ordem alfabética.
+          </p>
+          <ul class="song-list mt-xl" id="all-songs-list"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <div id="song-modal-container"></div>
+
+  <script src="js/songs.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/layout.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initLayout("solid");
+
+      document.getElementById("song-modal-container").innerHTML = renderSongModal();
+      initSongModal();
+
+      const params = new URLSearchParams(window.location.search);
+      const query = params.get("q");
+
+      let favorites = getFavorites();
+      let allSongs = getSongsSorted();
+
+      if (query) {
+        const results = searchSongs(query);
+        favorites = results.filter((s) => s.favorite);
+        allSongs = results.sort((a, b) => a.title.localeCompare(b.title, "pt"));
+
+        const resultsEl = document.getElementById("search-results");
+        const countEl = document.getElementById("search-results-count");
+        resultsEl.hidden = false;
+        countEl.textContent = results.length === 0
+          ? `Nenhum resultado para "${query}"`
+          : `${results.length} resultado${results.length !== 1 ? "s" : ""} para "${query}"`;
+
+        if (results.length === 0) {
+          document.getElementById("favorites-section").hidden = true;
+        }
+      }
+
+      const favoritesList = document.getElementById("favorites-list");
+      const allSongsList = document.getElementById("all-songs-list");
+
+      if (favorites.length > 0) {
+        favoritesList.innerHTML = favorites.map(renderSongListItem).join("");
+        initSongListClick(favoritesList);
+      } else if (query) {
+        document.getElementById("favorites-section").hidden = true;
+      }
+
+      allSongsList.innerHTML = allSongs.map(renderSongListItem).join("");
+      initSongListClick(allSongsList);
+
+      checkSongFromUrl();
+    });
+  </script>
+</body>
+</html>
