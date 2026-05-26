@@ -48,30 +48,20 @@
 
     <section class="section concert-instagram" aria-labelledby="instagram-heading">
       <div class="container">
-        <div class="concert-instagram__header">
-          <h2 id="instagram-heading" class="heading-subsection">Instagram</h2>
-          <div class="concert-instagram__accounts">
-            <a
-              href="https://www.instagram.com/tiagoamaralnogueira/"
-              class="concert-instagram__profile"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Tiago Nogueira
-            </a>
-            <a
-              href="https://www.instagram.com/osquatroemeia/"
-              class="concert-instagram__profile"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Os Quatro e Meia
-            </a>
-          </div>
-        </div>
+        <h2 id="instagram-heading" class="heading-subsection">Instagram</h2>
 
-        <div class="instagram-feed">
-          <div class="instagram-feed__grid" id="instagram-feed-grid" aria-label="Últimas publicações no Instagram"></div>
+        <p class="text-body text-muted instagram-feed__lead">
+          Últimas publicações de
+          <a href="https://www.instagram.com/tiagoamaralnogueira/" target="_blank" rel="noopener noreferrer">@tiagoamaralnogueira</a>.
+        </p>
+
+        <div class="instagram-feed mt-lg">
+          <div
+            class="instagram-feed__grid"
+            id="instagram-feed-grid"
+            aria-label="Últimas publicações no Instagram"
+            aria-live="polite"
+          ></div>
         </div>
 
         <p class="concert-instagram__cta mt-lg">
@@ -97,8 +87,8 @@
   <script src="js/concerts.js"></script>
   <script src="js/theme.js"></script>
   <script src="js/layout.js"></script>
+  <script src="js/instagram-feed-data.js"></script>
   <script src="js/instagram-feed.js"></script>
-  <script async src="https://www.instagram.com/embed.js" onload="processInstagramEmbeds()"></script>
   <script>
     function renderConcertItem(concert) {
       return `

@@ -20,15 +20,14 @@ function applyTheme(theme, { persist = true } = {}) {
 }
 
 function syncThemeToggle(theme) {
-  const toggle = document.getElementById("theme-toggle");
-  if (!toggle) return;
   const isDark = theme === "dark";
-  toggle.setAttribute("aria-pressed", String(isDark));
-  toggle.setAttribute(
-    "aria-label",
-    isDark ? "Ativar modo claro" : "Ativar modo escuro"
-  );
-  toggle.classList.toggle("theme-toggle--dark", isDark);
+  const label = isDark ? "Ativar modo claro" : "Ativar modo escuro";
+
+  document.querySelectorAll(".theme-toggle").forEach((toggle) => {
+    toggle.setAttribute("aria-pressed", String(isDark));
+    toggle.setAttribute("aria-label", label);
+    toggle.classList.toggle("theme-toggle--dark", isDark);
+  });
 }
 
 function toggleTheme() {
@@ -45,8 +44,9 @@ function toggleTheme() {
 function initTheme() {
   applyTheme(getPreferredTheme(), { persist: false });
 
-  const toggle = document.getElementById("theme-toggle");
-  if (!toggle || toggle.dataset.themeBound === "true") return;
-  toggle.dataset.themeBound = "true";
-  toggle.addEventListener("click", toggleTheme);
+  document.querySelectorAll(".theme-toggle").forEach((toggle) => {
+    if (toggle.dataset.themeBound === "true") return;
+    toggle.dataset.themeBound = "true";
+    toggle.addEventListener("click", toggleTheme);
+  });
 }

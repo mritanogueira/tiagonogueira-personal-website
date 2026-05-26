@@ -56,8 +56,11 @@ const HOME_SONG_ARROW = `<svg viewBox="0 0 12 12" fill="none" stroke="currentCol
 
 function getHomeSongMeta(card) {
   const song = typeof getSongById === "function" ? getSongById(card.id) : null;
+  const performer = song?.artist || card.artist;
+  const artist = song?.composer ? `${performer} · Música · ${song.composer}` : performer;
+
   return {
-    artist: song?.artist || card.artist,
+    artist,
     href: song ? `musica.html?song=${card.id}` : "musica.html",
   };
 }

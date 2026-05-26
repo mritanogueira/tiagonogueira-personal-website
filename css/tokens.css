@@ -1,4 +1,4 @@
-/* Design system — theme tokens */
+/* Design system — strict Bright / Dark theme tokens */
 
 :root {
   /* Typography */
@@ -77,23 +77,34 @@
   --logo-glow-active: drop-shadow(0 0 24px rgba(0, 0, 0, 0.28))
     drop-shadow(0 6px 26px rgba(0, 0, 0, 0.2));
 
-  /* Hero overlay (index.html only) — see .page-home .hero */
+  /* Hero photography overlay (index) — always light type on image */
   --color-hero-fg: #ffffff;
 }
 
-/* Bright mode (default on first visit) — editorial palette */
+/* Literal black/white — never swap between themes */
+:root,
+[data-theme="light"],
+[data-theme="dark"] {
+  --color-black: #000000;
+  --color-white: #ffffff;
+}
+
+/* Bright mode — light surfaces, dark foreground */
 
 :root,
 [data-theme="light"] {
   color-scheme: light;
 
-  --color-black: #000000;
-  --color-white: #ffffff;
   --color-grey-border: rgba(0, 0, 0, 0.15);
-  --color-grey-border-light: rgba(255, 255, 255, 0.6);
+  --color-grey-border-light: rgba(0, 0, 0, 0.12);
   --color-text-muted: rgba(0, 0, 0, 0.55);
   --color-overlay: rgba(0, 0, 0, 0.45);
   --color-bio-bg: #f7f5f0;
+  --color-bio-panel-bg: #f4f3e1;
+  /* Biografia — intro / open panel (cream editorial) */
+  --color-bio-accordion-surface: #f4f3e1;
+  /* Biografia — collapsed-cards section (rail area behind strips, not card faces) */
+  --color-bio-collapsed-section-bg: #ffffff;
   --color-bio-shape: rgba(210, 198, 175, 0.35);
   --color-accent: #0066ff;
 
@@ -107,80 +118,106 @@
   --color-shadow: rgba(0, 0, 0, 0.12);
   --color-modal-backdrop: rgba(0, 0, 0, 0.5);
 
+  /* Header, search, controls — solid bar matches page theme */
   --color-header-solid-bg: #ffffff;
-  --color-header-nav-hero: #ffffff;
-  --color-header-nav-solid: #000000;
-  --color-header-control-hero: #ffffff;
-  --color-header-control-solid: rgba(0, 0, 0, 0.55);
+  --color-header-fg: #000000;
+  --color-header-fg-muted: rgba(0, 0, 0, 0.55);
+  --color-header-border: rgba(0, 0, 0, 0.15);
 
-  --color-search-border-hero: rgba(255, 255, 255, 0.6);
-  --color-search-border-hero-hover: rgba(255, 255, 255, 0.75);
-  --color-search-border-hero-focus: #ffffff;
-  --color-search-icon-hero: #ffffff;
-  --color-search-text-hero: #ffffff;
-  --color-search-placeholder-hero: rgba(255, 255, 255, 0.65);
+  --color-search-border: rgba(0, 0, 0, 0.15);
+  --color-search-border-hover: rgba(0, 0, 0, 0.3);
+  --color-search-border-focus: rgba(0, 0, 0, 0.45);
+  --color-search-icon: rgba(0, 0, 0, 0.55);
+  --color-search-text: #000000;
+  --color-search-placeholder: rgba(0, 0, 0, 0.45);
 
-  --color-search-border-solid: rgba(0, 0, 0, 0.15);
-  --color-search-border-solid-hover: rgba(0, 0, 0, 0.3);
-  --color-search-border-solid-focus: rgba(0, 0, 0, 0.45);
-  --color-search-icon-solid: rgba(0, 0, 0, 0.55);
-  --color-search-text-solid: #000000;
-  --color-search-placeholder-solid: rgba(0, 0, 0, 0.45);
+  /* Mobile menu overlay */
+  --color-menu-overlay-bg: #ffffff;
+  --color-menu-overlay-fg: #000000;
+  --color-menu-overlay-fg-muted: rgba(0, 0, 0, 0.55);
+  --color-menu-overlay-border: rgba(0, 0, 0, 0.12);
+
+  /* Parallax scene (biografia photography) */
+  --color-parallax-scene-bg: #000000;
 
   --border-thin: 1px solid var(--color-grey-border);
   --border-thin-light: 1px solid var(--color-grey-border-light);
 }
 
-/* Dark mode — inverted editorial atmosphere */
+/* Dark mode — dark surfaces, light foreground */
 
 [data-theme="dark"] {
   color-scheme: dark;
 
-  --color-black: #f2f0ea;
-  --color-white: #121110;
   --color-grey-border: rgba(255, 255, 255, 0.14);
-  --color-grey-border-light: rgba(255, 255, 255, 0.38);
-  --color-text-muted: rgba(242, 240, 234, 0.58);
-  --color-overlay: rgba(0, 0, 0, 0.62);
-  --color-bio-bg: #1a1917;
-  --color-bio-shape: rgba(210, 198, 175, 0.12);
+  --color-grey-border-light: rgba(255, 255, 255, 0.1);
+  --color-text-muted: rgba(255, 255, 255, 0.58);
+  --color-overlay: rgba(0, 0, 0, 0.72);
+  --color-bio-bg: #000000;
+  --color-bio-panel-bg: #000000;
+  /* Biografia — intro / open panel */
+  --color-bio-accordion-surface: #1a1917;
+  /* Biografia — collapsed-cards section (rail area behind strips) */
+  --color-bio-collapsed-section-bg: #333333;
+  --color-bio-shape: rgba(255, 255, 255, 0.08);
   --color-accent: #5b9aff;
 
-  --color-bg: #121110;
-  --color-bg-elevated: #1c1b19;
-  --color-fg: #f2f0ea;
-  --color-fg-muted: rgba(242, 240, 234, 0.58);
-  --color-inverse-bg: #f2f0ea;
-  --color-inverse-fg: #121110;
+  --color-bg: #000000;
+  --color-bg-elevated: #121110;
+  --color-fg: #ffffff;
+  --color-fg-muted: rgba(255, 255, 255, 0.58);
+  --color-inverse-bg: #ffffff;
+  --color-inverse-fg: #000000;
   --color-surface-hover: rgba(255, 255, 255, 0.06);
-  --color-shadow: rgba(0, 0, 0, 0.45);
-  --color-modal-backdrop: rgba(0, 0, 0, 0.72);
+  --color-shadow: rgba(0, 0, 0, 0.55);
+  --color-modal-backdrop: rgba(0, 0, 0, 0.85);
 
-  --color-header-solid-bg: #121110;
-  --color-header-nav-hero: #ffffff;
-  --color-header-nav-solid: #f2f0ea;
-  --color-header-control-hero: #ffffff;
-  --color-header-control-solid: rgba(242, 240, 234, 0.65);
+  --color-header-solid-bg: #000000;
+  --color-header-fg: #ffffff;
+  --color-header-fg-muted: rgba(255, 255, 255, 0.65);
+  --color-header-border: rgba(255, 255, 255, 0.14);
 
-  --color-search-border-hero: rgba(255, 255, 255, 0.55);
-  --color-search-border-hero-hover: rgba(255, 255, 255, 0.72);
-  --color-search-border-hero-focus: #ffffff;
-  --color-search-icon-hero: #ffffff;
-  --color-search-text-hero: #ffffff;
-  --color-search-placeholder-hero: rgba(255, 255, 255, 0.6);
+  --color-search-border: rgba(255, 255, 255, 0.2);
+  --color-search-border-hover: rgba(255, 255, 255, 0.35);
+  --color-search-border-focus: rgba(255, 255, 255, 0.5);
+  --color-search-icon: rgba(255, 255, 255, 0.65);
+  --color-search-text: #ffffff;
+  --color-search-placeholder: rgba(255, 255, 255, 0.45);
 
-  --color-search-border-solid: rgba(255, 255, 255, 0.16);
-  --color-search-border-solid-hover: rgba(255, 255, 255, 0.28);
-  --color-search-border-solid-focus: rgba(255, 255, 255, 0.42);
-  --color-search-icon-solid: rgba(242, 240, 234, 0.65);
-  --color-search-text-solid: #f2f0ea;
-  --color-search-placeholder-solid: rgba(242, 240, 234, 0.45);
+  --color-menu-overlay-bg: #000000;
+  --color-menu-overlay-fg: #ffffff;
+  --color-menu-overlay-fg-muted: rgba(255, 255, 255, 0.58);
+  --color-menu-overlay-border: rgba(255, 255, 255, 0.14);
 
-  --logo-glow-soft: drop-shadow(0 0 18px rgba(255, 255, 255, 0.16))
-    drop-shadow(0 4px 20px rgba(255, 255, 255, 0.08));
-  --logo-glow-active: drop-shadow(0 0 26px rgba(255, 255, 255, 0.28))
-    drop-shadow(0 6px 28px rgba(255, 255, 255, 0.14));
+  --color-parallax-scene-bg: #000000;
+
+  --logo-glow-soft: drop-shadow(0 0 18px rgba(255, 255, 255, 0.12))
+    drop-shadow(0 4px 20px rgba(255, 255, 255, 0.06));
+  --logo-glow-active: drop-shadow(0 0 26px rgba(255, 255, 255, 0.22))
+    drop-shadow(0 6px 28px rgba(255, 255, 255, 0.1));
 
   --border-thin: 1px solid var(--color-grey-border);
   --border-thin-light: 1px solid var(--color-grey-border-light);
+}
+
+/* Legacy aliases — map old token names to unified theme tokens */
+:root,
+[data-theme="light"],
+[data-theme="dark"] {
+  --color-header-nav-solid: var(--color-header-fg);
+  --color-header-control-solid: var(--color-header-fg-muted);
+  --color-header-nav-hero: var(--color-header-fg);
+  --color-header-control-hero: var(--color-header-fg-muted);
+  --color-search-border-solid: var(--color-search-border);
+  --color-search-border-solid-hover: var(--color-search-border-hover);
+  --color-search-border-solid-focus: var(--color-search-border-focus);
+  --color-search-icon-solid: var(--color-search-icon);
+  --color-search-text-solid: var(--color-search-text);
+  --color-search-placeholder-solid: var(--color-search-placeholder);
+  --color-search-border-hero: var(--color-search-border);
+  --color-search-border-hero-hover: var(--color-search-border-hover);
+  --color-search-border-hero-focus: var(--color-search-border-focus);
+  --color-search-icon-hero: var(--color-search-icon);
+  --color-search-text-hero: var(--color-search-text);
+  --color-search-placeholder-hero: var(--color-search-placeholder);
 }

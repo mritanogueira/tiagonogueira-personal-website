@@ -13,6 +13,11 @@ const SOCIAL_ACCOUNTS = [
   },
 ];
 
+/** Instagram links shown in the mobile menu overlay (excludes band account). */
+const MOBILE_MENU_SOCIAL_ACCOUNTS = SOCIAL_ACCOUNTS.filter(
+  (account) => account.name !== "Os Quatro e Meia"
+);
+
 function renderSocialIconLink(account, linkClass = "social-link") {
   return `<a href="${account.url}" class="${linkClass}" target="_blank" rel="noopener noreferrer" aria-label="Instagram — ${account.name}">${INSTAGRAM_ICON}</a>`;
 }
@@ -28,24 +33,22 @@ function renderInstagramProfileLink(account, linkClass, nameClass = "") {
   return `<a href="${account.url}" class="${linkClass}" target="_blank" rel="noopener noreferrer">${INSTAGRAM_ICON}${nameMarkup}</a>`;
 }
 
-function renderFooterSocialBlock(account, index) {
-  const label =
-    index === 0 ? `<p class="site-footer__info-label">Instagram</p>` : "";
-  const blockClass =
-    index === 0
-      ? "site-footer__info-block"
-      : "site-footer__info-block site-footer__info-block--social-tail";
-
+function renderFooterSocialSection() {
   return `
-    <div class="${blockClass}">
-      ${label}
-      <p class="site-footer__info-value">
-        ${renderInstagramProfileLink(
-          account,
-          "site-footer__social-item site-footer__social-link",
-          "site-footer__social-name"
-        )}
-      </p>
+    <div class="site-footer__info-block site-footer__info-block--social">
+      <p class="site-footer__info-label">Instagram</p>
+      <div class="site-footer__social-row">
+        ${SOCIAL_ACCOUNTS.map(
+          (account) => `
+          <p class="site-footer__info-value">
+            ${renderInstagramProfileLink(
+              account,
+              "site-footer__social-item site-footer__social-link",
+              "site-footer__social-name"
+            )}
+          </p>`
+        ).join("")}
+      </div>
     </div>`;
 }
 
@@ -139,12 +142,14 @@ function renderSiteNav(linkClass = "site-nav__link") {
 const THEME_TOGGLE_BRIGHT = `<svg class="theme-toggle__svg" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="1" y="1" width="59" height="59" rx="29.5" fill="white" fill-opacity="0.5" stroke="black" stroke-width="2"/><path d="M30.9998 36.4286C33.7636 36.4286 35.262 35.959 36.1169 35.0985C36.9733 34.2364 37.4285 32.7366 37.4285 29.9999C37.4285 27.263 36.9734 25.7633 36.1169 24.9012C35.262 24.0407 33.7636 23.5712 30.9998 23.5712C28.2365 23.5712 26.7551 24.041 25.908 24.8993C25.0548 25.7639 24.6008 27.2673 24.571 30.0106C24.5415 32.7408 24.9986 34.2369 25.8582 35.0965C26.7209 35.9593 28.2358 36.4285 30.9998 36.4286Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M31 17.9286V19.7857" stroke="black" stroke-width="2" stroke-linecap="round"/><path d="M31 40.2143V42.0714" stroke="black" stroke-width="2" stroke-linecap="round"/><path d="M43.0714 30L41.2143 30" stroke="black" stroke-width="2" stroke-linecap="round"/><path d="M20.7858 30L18.9286 30" stroke="black" stroke-width="2" stroke-linecap="round"/><path d="M21.7142 20.7143L23.0274 22.0275" stroke="black" stroke-width="2" stroke-linecap="round"/><path d="M21.7142 39.6702L23.0274 38.357" stroke="black" stroke-width="2" stroke-linecap="round"/><path d="M40.6702 20.7143L39.357 22.0275" stroke="black" stroke-width="2" stroke-linecap="round"/><path d="M40.6702 39.6702L39.357 38.357" stroke="black" stroke-width="2" stroke-linecap="round"/></svg>`;
 const THEME_TOGGLE_DARK = `<svg class="theme-toggle__svg" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="1" y="1" width="59" height="59" rx="29.5" stroke="white" stroke-width="2"/><path d="M41.92 34.5224L42.8449 34.9026C43.0035 34.5169 42.9061 34.0733 42.6004 33.7896C42.2948 33.5058 41.8452 33.4415 41.4723 33.6283L41.92 34.5224ZM30.9386 41.958L30.9386 42.958L30.9386 42.958L30.9386 41.958ZM19.0402 29.8623L18.0402 29.8622L18.0402 29.8623L19.0402 29.8623ZM28.4152 18.0429L29.2223 18.6333C29.4678 18.2977 29.48 17.8452 29.2529 17.4968C29.0258 17.1485 28.6069 16.977 28.2007 17.0662L28.4152 18.0429ZM26.2765 24.6201L25.2765 24.6201L25.2765 24.6201L26.2765 24.6201ZM37.131 35.6543L37.131 36.6543L37.131 36.6543L37.131 35.6543ZM41.92 34.5224L40.9951 34.1422C39.3459 38.154 35.4576 40.9578 30.9386 40.958L30.9386 41.958L30.9386 42.958C36.3119 42.9578 40.9043 39.6234 42.8449 34.9026L41.92 34.5224ZM30.9386 41.958L30.9386 40.958C24.9353 40.958 20.0402 36.0054 20.0402 29.8623L19.0402 29.8623L18.0402 29.8623C18.0402 37.0788 23.7998 42.958 30.9386 42.958L30.9386 41.958ZM19.0402 29.8623L20.0402 29.8623C20.0403 24.5319 23.7302 20.0953 28.6296 19.0197L28.4152 18.0429L28.2007 17.0662C22.3825 18.3435 18.0404 23.5939 18.0402 29.8622L19.0402 29.8623ZM28.4152 18.0429L27.608 17.4526C26.1429 19.4558 25.2765 21.9372 25.2765 24.6201L26.2765 24.6201L27.2765 24.6201C27.2765 22.3736 28.0007 20.3035 29.2223 18.6333L28.4152 18.0429ZM26.2765 24.6201L25.2765 24.6201C25.2767 31.2507 30.5685 36.6543 37.131 36.6543L37.131 35.6543L37.131 34.6543C31.7039 34.6543 27.2767 30.1773 27.2765 24.62L26.2765 24.6201ZM37.131 35.6543L37.131 36.6543C39.0106 36.6542 40.7885 36.2074 42.3678 35.4166L41.92 34.5224L41.4723 33.6283C40.1622 34.2843 38.69 34.6542 37.131 34.6543L37.131 35.6543Z" fill="white"/></svg>`;
 
-function renderThemeToggle() {
+function renderThemeToggle(options = {}) {
+  const { extraClass = "" } = options;
+  const toggleClass = ["theme-toggle", extraClass].filter(Boolean).join(" ");
+
   return `
     <button
       type="button"
-      class="theme-toggle"
-      id="theme-toggle"
+      class="${toggleClass}"
       aria-pressed="false"
       aria-label="Ativar modo escuro"
     >
@@ -181,7 +186,9 @@ function renderMobileMenu() {
     <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
       <div class="mobile-menu__panel">
         <div class="mobile-menu__top">
-          <a href="index.html" class="mobile-menu__mark" aria-label="Tiago Nogueira — página inicial">TN</a>
+          <a href="index.html" class="site-logo mobile-menu__logo" aria-label="Tiago Nogueira — página inicial">
+            <img src="logotipo.png" alt="" class="site-logo__img" width="200" height="200" />
+          </a>
           <button type="button" class="mobile-menu__close" id="mobile-menu-close" aria-label="Fechar menu">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
               <path d="M4 4L16 16M16 4L4 16"/>
@@ -193,10 +200,13 @@ function renderMobileMenu() {
           <a href="musica.html" class="mobile-menu__link${active("musica")}">Música</a>
           <a href="concertos.html" class="mobile-menu__link${active("concertos")}">Concertos</a>
         </nav>
+        <div class="mobile-menu__theme">
+          ${renderThemeToggle({ extraClass: "theme-toggle--menu" })}
+        </div>
         <div class="mobile-menu__footer">
           <div class="mobile-menu__divider" aria-hidden="true"></div>
           <div class="mobile-menu__social">
-            ${SOCIAL_ACCOUNTS.map(
+            ${MOBILE_MENU_SOCIAL_ACCOUNTS.map(
               (account) =>
                 `<a href="${account.url}" target="_blank" rel="noopener noreferrer">Instagram — ${account.name}</a>`
             ).join("")}
@@ -207,7 +217,7 @@ function renderMobileMenu() {
   `;
 }
 
-function renderHeader(variant = "light") {
+function renderHeader(variant = "solid") {
   const isLight = variant === "light";
   const headerClass = [
     "site-header",
@@ -227,7 +237,7 @@ function renderHeader(variant = "light") {
             ${renderSiteNav()}
           </div>
           <div class="site-header__controls">
-            ${renderThemeToggle()}
+            ${renderThemeToggle({ extraClass: "theme-toggle--header" })}
             ${renderMenuToggle()}
           </div>
         </div>
@@ -260,7 +270,7 @@ function renderFooter() {
               <a href="mailto:pedro.barbosa@primeiralinha.pt">pedro.barbosa@primeiralinha.pt</a>
             </p>
           </div>
-          ${SOCIAL_ACCOUNTS.map((account, index) => renderFooterSocialBlock(account, index)).join("")}
+          ${renderFooterSocialSection()}
         </div>
       </div>
       <div class="site-footer__copyright">
@@ -291,6 +301,11 @@ function renderSongModal() {
   `;
 }
 
+function getSpotifyEmbedTheme() {
+  const theme = document.documentElement.getAttribute("data-theme");
+  return theme === "dark" ? "0" : "1";
+}
+
 function renderSongStreaming(song) {
   const spotifyId = song.spotifyTrackId;
   const youtubeId = song.youtubeVideoId;
@@ -298,16 +313,20 @@ function renderSongStreaming(song) {
 
   const spotifyEmbed = spotifyId
     ? `
-      <div class="modal__embed">
+      <div class="modal__embed modal__embed--spotify">
         <h3 class="modal__embed-label">Spotify</h3>
-        <iframe
-          class="modal__embed-frame modal__embed-frame--spotify"
-          src="https://open.spotify.com/embed/track/${spotifyId}?utm_source=generator"
-          title="Spotify — ${song.title}"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"
-        ></iframe>
+        <div class="modal__embed-spotify-host">
+          <iframe
+            class="modal__embed-frame modal__embed-frame--spotify"
+            src="https://open.spotify.com/embed/track/${spotifyId}?utm_source=generator&theme=${getSpotifyEmbedTheme()}"
+            title="Spotify — ${song.title}"
+            width="100%"
+            height="152"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+          ></iframe>
+        </div>
       </div>`
     : "";
 
@@ -332,16 +351,28 @@ function renderSongStreaming(song) {
   return `${spotifyEmbed}${youtubeEmbed}`;
 }
 
+function formatSongMeta(song) {
+  const parts = [String(song.year), song.artist];
+  if (song.composer) parts.push(`Música · ${song.composer}`);
+  return parts.join(" · ");
+}
+
 function renderSongListItem(song) {
   const coverSrc = song.cover || "assets/covers/o-tempo-vai-esperar.jpg";
-  const coverHtml = `<img src="${coverSrc}" alt="" class="song-list__cover" width="56" height="56" loading="lazy" />`;
+  const coverHtml = `<img src="${coverSrc}" alt="" class="song-list__cover" width="112" height="112" loading="lazy" />`;
+  const composerHtml = song.composer
+    ? `<span class="song-list__credit">Música · ${song.composer}</span>`
+    : "";
 
   return `
     <li class="song-list__item" data-song-id="${song.id}" tabindex="0" role="button" aria-label="Ver ${song.title}">
       ${coverHtml}
-      <span class="song-list__title">${song.title}</span>
-      <span class="song-list__year">${song.year}</span>
-      <span class="song-list__artist">${song.artist}</span>
+      <div class="song-list__meta">
+        <span class="song-list__title">${song.title}</span>
+        <span class="song-list__year">${song.year}</span>
+        <span class="song-list__artist">${song.artist}</span>
+        ${composerHtml}
+      </div>
     </li>
   `;
 }
@@ -369,7 +400,7 @@ function openSongModal(song) {
   const streamingHtml = renderSongStreaming(song);
   const hasStreaming = Boolean(streamingHtml);
 
-  document.getElementById("modal-meta").textContent = `${song.year} · ${song.artist}`;
+  document.getElementById("modal-meta").textContent = formatSongMeta(song);
   document.getElementById("modal-title").textContent = song.title;
   document.getElementById("modal-lyrics").textContent = song.lyrics;
 
